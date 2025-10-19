@@ -35,20 +35,37 @@ import os
 import torch
 import os
 
-import torch
-import os
+import torch, sys, os
 
-# --- Device setup (global) ---
-if "DEVICE_INIT" not in globals():
+# --- Device setup utility (final release version) ---
+import torch, sys
+import multiprocessing
+
+def get_device():
+    """Return CUDA device if available, else CPU — prints once per main process."""
+    if hasattr(sys, "_DEVICE"):
+        return sys._DEVICE  # Don't redo detection or printing
+
+    is_main = multiprocessing.current_process().name == "MainProcess"
+
     if torch.cuda.is_available():
-        device = torch.device("cuda")
-        DEVICE = "cuda"
-        print(f"\n✅ Using GPU: {torch.cuda.get_device_name(0)}\n")
+        sys._DEVICE = torch.device("cuda")
+        if is_main:
+            print(f"\n✅ Using GPU: {torch.cuda.get_device_name(0)}\n")
     else:
-        device = torch.device("cpu")
-        DEVICE = "cpu"
-        print("\n⚠️ CUDA not available, using CPU instead.\n")
-    DEVICE_INIT = True  # flag so it only prints once
+        sys._DEVICE = torch.device("cpu")
+        if is_main:
+            print("\n⚠ CUDA not available, using CPU instead.\n")
+
+    return sys._DEVICE
+
+DEVICE = get_device()
+
+
+
+
+
+
 
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "phase3_results")
@@ -338,9 +355,9 @@ def main():
     epochs = 50
 
     results: List[RunResult] = []
-    #results.append(train_fixed   (ModelCIFAR, train_loader, test_loader, epochs=epochs, lr=1e-3))
-    #results.append(train_cosine  (ModelCIFAR, train_loader, test_loader, epochs=epochs, lr_max=1e-1, lr_min=1e-5))
-    #results.append(train_onecycle(ModelCIFAR, train_loader, test_loader, epochs=epochs, max_lr=1e-1, base_lr=1e-5))
+    results.append(train_fixed   (ModelCIFAR, train_loader, test_loader, epochs=epochs, lr=1e-3))
+    results.append(train_cosine  (ModelCIFAR, train_loader, test_loader, epochs=epochs, lr_max=1e-1, lr_min=1e-5))
+    results.append(train_onecycle(ModelCIFAR, train_loader, test_loader, epochs=epochs, max_lr=1e-1, base_lr=1e-5))
     results.append(train_adaptive(ModelCIFAR, train_loader, test_loader, epochs=epochs))
 
     # ----- Save comparison plots -----

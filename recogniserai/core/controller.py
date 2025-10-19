@@ -1,18 +1,34 @@
 # recogniserai/core/controller.py
+
 from __future__ import annotations
+
+import sys, os, math
 from dataclasses import dataclass
 from typing import Tuple
-import math
 import numpy as np
 from collections import deque
-import numpy as np
-import math
 import recogniserai
 
-# Display a startup message once when the controller is first imported
-if not getattr(recogniserai, "_banner_shown", False):
-    print(f"RecogniserAI v{recogniserai.__version__} — Adaptive Controller Ready")
-    recogniserai._banner_shown = True
+def _init_message():
+    """Print RecogniserAI banner only once per main process (Windows-safe)."""
+    import multiprocessing
+    import sys, os
+
+    # Skip in child DataLoader workers
+    if multiprocessing.current_process().name != "MainProcess":
+        return
+
+    if not getattr(sys, "_RECOG_INIT_", False):
+        print(f"RecogniserAI v{getattr(recogniserai, '__version__', '0.1.0')} — Adaptive Controller Ready")
+        sys._RECOG_INIT_ = True
+
+_init_message()
+
+
+
+
+
+
 
 
 @dataclass
