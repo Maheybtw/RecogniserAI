@@ -1,17 +1,14 @@
 
-````markdown
-<h1 align="center">RecogniserAI</h1>
-<p align="center">
-  <em>Adaptive control framework for self-regulating deep learning systems.</em>
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="https://github.com/Maheybtw/RecogniserAI/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License">
-  </a>
-  <img src="https://img.shields.io/badge/Python-3.9%2B-blue.svg" alt="Python">
-  <img src="https://img.shields.io/badge/Framework-PyTorch-orange.svg" alt="PyTorch">
-</p>
+# 🧠 RecogniserAI  
+**Adaptive control framework for self-regulating deep learning systems**  
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Maheybtw/RecogniserAI/blob/main/LICENSE)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
+![PyTorch](https://img.shields.io/badge/Framework-PyTorch-orange.svg)
+
+</div>
 
 ---
 
