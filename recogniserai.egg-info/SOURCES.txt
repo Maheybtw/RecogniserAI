@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+recogniserai/__init__.py
+recogniserai.egg-info/PKG-INFO
+recogniserai.egg-info/SOURCES.txt
+recogniserai.egg-info/dependency_links.txt
+recogniserai.egg-info/top_level.txt
+recogniserai/core/__init__.py
+recogniserai/core/controller.py
+recogniserai/core/efficiency.py
+recogniserai/core/energy.py
+recogniserai/core/utils.py
+recogniserai/examples/demo_cifar.py
+tests/test_basic.py
